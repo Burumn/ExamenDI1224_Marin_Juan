@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -32,7 +30,7 @@ public class ExamenDI1224JuanMarin extends javax.swing.JPanel {
         initComponents();
         jComboBoxClase.addActionListener(e -> actualizarAlumnos());
         
-        // Llena el JComboBox con los equipos
+
         jComboBoxClase.addItem("Clase_A");
         jComboBoxClase.addItem("Clase_B");
     }
@@ -173,17 +171,17 @@ public class ExamenDI1224JuanMarin extends javax.swing.JPanel {
             org.apache.poi.ss.usermodel.Sheet sheet;
 
             if (archivo.exists()) {
-                // Si el archivo existe, abrirlo
+
                 FileInputStream fis = new FileInputStream(archivo);
                 wb = new XSSFWorkbook(fis);
                 sheet = wb.getSheetAt(0);
                 fis.close();
             } else {
-                // Si no existe, crearlo desde cero
+
                 wb = new XSSFWorkbook();
                 sheet = wb.createSheet("Estadísticas");
 
-                // Crear las cabeceras (agregar FG%, eFG%, Tiros Totales)
+
                 Row cabecera = sheet.createRow(0);
                 cabecera.createCell(0).setCellValue("Nombre Alumno");
                 cabecera.createCell(1).setCellValue("Mates");
@@ -193,10 +191,10 @@ public class ExamenDI1224JuanMarin extends javax.swing.JPanel {
             }
 
                 
-                // Crear una nueva fila para el nuevo jugador en la primera fila libre
+
             Row row = sheet.createRow(1);
             row.createCell(0).setCellValue(nombre);
-            row.createCell(1).setCellValue(mates);  // Agregar Tiros Totales Realizados
+            row.createCell(1).setCellValue(mates); 
             row.createCell(2).setCellValue(lengua);
             row.createCell(3).setCellValue(fisica);
             row.createCell(4).setCellValue(quimica);
@@ -220,15 +218,15 @@ public class ExamenDI1224JuanMarin extends javax.swing.JPanel {
     private void actualizarAlumnos() {
         String equipoSeleccionado = (String) jComboBoxClase.getSelectedItem();
 
-        jComboBoxAlumno.removeAllItems();  // Limpia el JComboBox de jugadores
+        jComboBoxAlumno.removeAllItems(); 
 
         if (equipoSeleccionado.equals("Clase_A")) {
-            // Agrega jugadores del equipo Los Ángeles Lakers
+
             for (String jugador : clase1) {
                 jComboBoxAlumno.addItem(jugador);
             }
         } else if (equipoSeleccionado.equals("Clase_B")) {
-            // Agrega jugadores del equipo Golden State Warriors
+
             for (String jugador : clase2) {
                 jComboBoxAlumno.addItem(jugador);
             }
